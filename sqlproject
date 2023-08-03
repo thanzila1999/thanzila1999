@@ -1,0 +1,80 @@
+create databse library1;
+use library1;
+
+CREATE TABLE department (Branch_no INT PRIMARY KEY,Manager_Id INT,Branch_address VARCHAR(255),Contact_no VARCHAR(15),
+FOREIGN KEY (Manager_Id) REFERENCES Employee(Emp_Id));
+
+CREATE TABLE Employee data (Emp_Id INT PRIMARY KEY,Emp_name VARCHAR(255),Position VARCHAR(100),Salary INT);
+
+CREATE TABLE Customer  data(Customer_Id INT PRIMARY KEY,Customer_name VARCHAR(255),
+Customer_address VARCHAR(255),Reg_date DATE);
+
+
+CREATE TABLE inviting status (Issue_Id INT PRIMARY KEY,Issued_cust INT,Issued_book_name VARCHAR(255),Issue_date DATE,
+Isbn_book VARCHAR(20),FOREIGN KEY (Issued_cust) REFERENCES Customer(Customer_Id),FOREIGN KEY (Isbn_book) REFERENCES Books(ISBN));
+
+
+CREATE TABLE guest data (Return_Id INT PRIMARY KEY,Return_cust INT,Return_book_name VARCHAR(255),Return_date DATE,
+Isbn_book2 VARCHAR(20),FOREIGN KEY (Return_cust) REFERENCES Customer(Customer_Id),
+FOREIGN KEY (Isbn_book2) REFERENCES Books(ISBN));
+
+
+CREATE TABLE Books category (ISBN VARCHAR(20) PRIMARY KEY,Book_title VARCHAR(255),Category VARCHAR(100),Rental_Price INT,
+Status ENUM('yes', 'no'),Author VARCHAR(255),Publisher VARCHAR(255));
+
+INSERT INTO department (Branch_no, Manager_Id, Branch_address, Contact_no)
+VALUES(1, 101, 'palakkad', '111111111'),(2, 102, 'malappuram', '22222222'),
+(3, 103, 'wayanad', '3333333'),(4, 104, 'kozhikkod', '4444444'),(5, 105, 'thiruvanandapuram', '555555'),
+(6, 106, 'kollam', '666666'),(7,107 ,'alappuzha','777777') ,(8, 108, 'ernakulam' ,'888888');
+
+INSERT INTO employee data (Emp_Id, Emp_name,Position, Salary)
+VALUES (101,'ash_n','hr',47000),(102,'splash','devoloper',45000),(103,'thanzi','co ordinator',70000),
+(104,'ashiq','legal advisr',175000),(105,'thariq','fire&safety',120000),(106,'thasli','managor',90000),(107,'arifa',hrcome devolepor',45000),
+(108,'haseena',trainer','46000);
+
+INSERT INTO customer data (Customer_Id, Customer_name, Customer_address, Reg_date)
+VALUES(1, 'apple', 'play', '01-02-2015'),(2, 'w', 'india', '07-05-1998'),
+(3, 'splash', 'dubai', '05-08-2000'),(4, 'max', 'america', '14-04-1999'),(5, 'vega','europe','18-02-2003);
+
+INSERT INTO Books category (ISBN, Book_title, Category, Rental_Price, Status, Author, Publisher)
+VALUES ('traveling', 'skp', '', 45,'yes','skpottakkad','dcb'),('novel', 'alchemist', 'indresting', 100,'yes','paulochoilo','abc_books'),
+('bareact', 'criminal', 'lAW', 90,'no','asiq','adb_books'),('lifestry', 'aadujeevitham', 'feeling', 60,'no','benyamin','abc_books');
+
+
+INSERT INTO guest data (Issue_Id, Issued_cust, Issued_book_name, Issue_date, Isbn_book)
+VALUES(1, 1,'aaaaaaa', '30-03-2022', 'data1'),(2, 2, 'bbbbbbbbb', '07-12-2013', 'data2'),
+(3, 3, 'law', '24-04-2023', 'data3'),(4, 4, 'traveling', '05-07-2020', 'data4');
+
+
+INSERT INTO guest data (Return_Id, Return_cust, Return_book_name, Return_date, Isbn_book2)
+VALUES (1, 1, 'abcdefg', '22-05-2020', 'issue1');
+INSERT INTO gust data (Return_Id, Return_cust, Return_book_name, Return_date, Isbn_book2)
+VALUES ( 2,2, 'ccgabc', '17-12-2019', 'Issue2'),
+(3, 3, 'law', '23-07-2010', 'Issue3'),(4, 4, 'bare act', '22-11-2006', 'Issue4');
+SELECT * FROM department;
+SELECT * FROM Employee data;
+SELECT * FROM Customer data;
+SELECT * FROM Book category;
+SELECT * FROM IssueStatus;
+SELECT * FROM guest data;
+
+
+SELECT Book_title, Category, Rental_Price FROM Books WHERE Status = 'yes';
+
+
+SELECT Emp_name, Salary FROM Employee ORDER BY Salary DESC;
+
+
+
+SELECT B.Book_title, C.Customer_name FROM Books AS B
+JOIN IssueStatus AS I ON B.ISBN = I.Isbn_book
+JOIN Customer AS C ON I.Issued_cust = C.Customer_Id;
+
+
+
+SELECT Category, COUNT(*) AS Total_Books FROM Books GROUP BY Category
+
+UPDATE Employee data SET Salary=95000 WHERE Emp_Id=105;
+UPDATE Employee data Salary=140000 WHERE Emp_Id=104;
+SELECT Emp_name, Position FROM Employee WHERE Salary > 90000;
+
